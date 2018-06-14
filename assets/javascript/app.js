@@ -79,6 +79,7 @@ $(document).ready(function() {
         timeSec.html(`<h2>Time Remaining: ${question.timeLeft} Seconds</h2>`);
         if (question.timeLeft === 0) {
             quesSec.html(`<h1>Out of Time!</h1>`);
+            choicesSec.html(`<h4>The Correct Answer was: ${question.answer}</h4>`);
         } else if (question.correct) {
             quesSec.html(`<h1>Correct!</h1>`);
         } else {
@@ -99,7 +100,7 @@ $(document).ready(function() {
                 choicesSec.append(`<h4>Correct Answers: ${totalWins}</h4>`);
                 choicesSec.append(`<h4>Incorrect Answers: ${totalLoses}</h4>`);
                 choicesSec.append(`<h4>Unanswered: ${totalQues - totalLoses - totalWins}</h4>`);
-                choicesSec.append(`<button type="button" class="btn btn-outline-success btn-lg btn-block init">Start Over?</button>`);
+                choicesSec.append(`<button type="button" class="btn btn-outline-success btn-lg btn-block rounded-0 init">Start Over?</button>`);
             }
         }, 2000);
     }
