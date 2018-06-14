@@ -1,6 +1,7 @@
-$(document).ready(function() { 
-    const TIMEALLOWED = 15;
+$(document).ready(function () {
+    const TIMEALLOWED = 20;
     const SRC = "assets/images/";
+    const RESULTDISPLAYTIME = 3000;
 
     class Question {
 
@@ -25,7 +26,7 @@ $(document).ready(function() {
         }
 
         startCountDown() {
-            this.interval = setInterval(() => {this.countDown()}, 1000);
+            this.interval = setInterval(() => { this.countDown() }, 1000);
         }
 
         countDown() {
@@ -88,12 +89,12 @@ $(document).ready(function() {
         }
         choicesSec.append(`<img src=\"${question.imgSrc}\">`);
 
-        setTimeout(function() {
+        setTimeout(function () {
             if (quesNum < totalQues - 1) {
-                    quesNum++;
-                    stageQuestion(quesList[quesNum]);
-                    quesList[quesNum].startCountDown();
-                
+                quesNum++;
+                stageQuestion(quesList[quesNum]);
+                quesList[quesNum].startCountDown();
+
             } else {
                 quesSec.html(`<h1>All done, Here is how you did!</h1>`);
                 choicesSec.empty();
@@ -102,7 +103,7 @@ $(document).ready(function() {
                 choicesSec.append(`<h4>Unanswered: ${totalQues - totalLoses - totalWins}</h4>`);
                 choicesSec.append(`<button type="button" class="btn btn-outline-success btn-lg btn-block rounded-0 init">Start Over?</button>`);
             }
-        }, 2000);
+        }, RESULTDISPLAYTIME);
     }
 
     function initialize() {
@@ -113,28 +114,28 @@ $(document).ready(function() {
         gameOver = false;
         clearStage();
 
-        quesList.push( 
+        quesList.push(
             new Question("What was the first full length CGI movie?",
-            "Toy Story", ["A Bug's Life", "Monsters' Inc", "Toy Story", "The Lion King"], 
-            `${SRC}toyStory.gif`) 
-        );
-
-        quesList.push( 
-            new Question("Which of those is NOT a name of one of the Spice Girls?", 
-            "Fred Spice", ["Sporty Spice", "Fred Spice", "Scary Spice", "Posh Spice"], 
-            `${SRC}spiceGirls.gif`) 
+                "Toy Story", ["A Bug's Life", "Monsters' Inc", "Toy Story", "The Lion King"],
+                `${SRC}toyStory.gif`)
         );
 
         quesList.push(
-            new Question("Which NBA team won the most titles in the 90s?", 
-            "Chicago Bulls", ["New York Knicks", "Portland Trailblazers", "Los Angeles Lakers", "Chicago Bulls"], 
-            `${SRC}chicagoBulls.gif`)
+            new Question("Which of those is NOT a name of one of the Spice Girls?",
+                "Fred Spice", ["Sporty Spice", "Fred Spice", "Scary Spice", "Posh Spice"],
+                `${SRC}spiceGirls.gif`)
         );
 
         quesList.push(
-            new Question("Which Group released the hit song, \"Smells Like Teen Spirit\"?", 
-            "Nirvana", ["Nirvana", "Backstreet Boys", "The OffSpring", "No Doubt"], 
-            `${SRC}nirvana.gif`)
+            new Question("Which NBA team won the most titles in the 90s?",
+                "Chicago Bulls", ["New York Knicks", "Portland Trailblazers", "Los Angeles Lakers", "Chicago Bulls"],
+                `${SRC}chicagoBulls.gif`)
+        );
+
+        quesList.push(
+            new Question("Which Group released the hit song, \"Smells Like Teen Spirit\"?",
+                "Nirvana", ["Nirvana", "Backstreet Boys", "The OffSpring", "No Doubt"],
+                `${SRC}nirvana.gif`)
         );
 
         totalQues = quesList.length;
@@ -147,12 +148,12 @@ $(document).ready(function() {
         quesList[quesNum].startCountDown();
     }
 
-    $(document).on("click", ".init", function() {
+    $(document).on("click", ".init", function () {
         /** Initializing Game. */
         initialize();
     });
 
-    $(document).on("click", ".option", function() {
+    $(document).on("click", ".option", function () {
         let currQues = quesList[quesNum];
         let usrChoice = $(this).text();
         console.log(`User chose: ${usrChoice}`);
@@ -163,12 +164,12 @@ $(document).ready(function() {
             totalLoses++;
             currQues.correct = false;
         }
-        
+
         currQues.clearCountDown();
         clearStage();
         displayResult(currQues);
     });
 
-    
+
 
 });
